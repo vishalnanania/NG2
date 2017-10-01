@@ -1,0 +1,10 @@
+<div class="container">
+<h3>Top Heroes</h3>
+  <div class="row">
+    <div class="col-sm-6 col-md-3" *ngFor="let hero of heroes">
+        <a [routerLink]="['/detail', hero.id]">
+          <h4>{{hero.name}}</h4>
+        </a>
+    </div>
+  </div>
+</div>
