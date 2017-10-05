@@ -8,6 +8,7 @@
          [class.active]="hero === selectedHero"
          (click)="onSelect(hero)">
         {{hero.id}} : {{hero.name}}
+        <button class="badge" (click)="delete(hero); $event.stopPropagation()">x</button>
       </a>
     </div>
     <div class="col-sm-6">
