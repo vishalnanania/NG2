@@ -10,12 +10,17 @@
         {{hero.id}} : {{hero.name}}
       </a>
     </div>
-    <div class="col-sm-6" *ngIf="selectedHero">
-      <h3>
-        {{selectedHero.name | uppercase}} is my hero
-      </h3>
-      <button (click)="gotoDetail()">View Details</button>
+    <div class="col-sm-6">
+      <div *ngIf="selectedHero">
+        <h3>{{selectedHero.name | uppercase}} is my hero</h3>
+        <button type="button" class="btn btn-primary btn-sm" (click)="gotoDetail()">View Details</button>
+      </div>
+
+      <div>
+      <h3>Add Hero</h3>
+      <label>Hero name:</label> <input #heroName />
+      <button type="button" class="btn btn-primary btn-sm" (click)="add(heroName.value); heroName.value=''">Add</button>
+      </div>
     </div>
   </div>
-
 </div>
