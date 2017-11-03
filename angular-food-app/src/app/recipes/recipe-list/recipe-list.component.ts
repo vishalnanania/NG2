@@ -13,6 +13,10 @@ export class RecipeListComponent implements OnInit {
       new Recipe('Subway', 'vegetable footlong', 'https://i.pinimg.com/originals/d0/c9/53/d0c95321eb3c28ffdd880593ef1305d3.jpg')
   ];
 
+  eventFired (eventData){
+    console.log("event Fired", eventData);
+  }
+
   constructor() { }
 
   ngOnInit() {
