@@ -7,5 +7,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.Emulated // None, Native
 })
 export class AppComponent {
+    recipeComponent = true;
+    shoppingListComponent = false;
 
+    changeView(viewData){
+        this.recipeComponent = viewData.recipeComponent;
+        this.shoppingListComponent = viewData.shoppingListComponent;
+    }
 }

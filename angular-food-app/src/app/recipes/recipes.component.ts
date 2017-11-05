@@ -6,6 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
+
+  selectedRecipe;
+  onSelectedRecipe3(selectedRecipe){
+    console.log(selectedRecipe);
+    this.selectedRecipe = selectedRecipe;
+  }
+
   constructor() { }
 
   ngOnInit() {
