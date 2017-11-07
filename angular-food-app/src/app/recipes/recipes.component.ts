@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class RecipesComponent implements OnInit {
 
   selectedRecipe;
+  switchTest="";
   onSelectedRecipe3(selectedRecipe){
     console.log(selectedRecipe);
     this.selectedRecipe = selectedRecipe;
