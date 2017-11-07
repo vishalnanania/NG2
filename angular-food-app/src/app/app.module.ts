@@ -11,6 +11,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { BasicHighlightDirective } from './directive/basic-highlight.directive';
+import { UnlessDirective } from './directive/unless.directive';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { BasicHighlightDirective } from './directive/basic-highlight.directive';
     ShoppingListComponent,
     ShoppingEditComponent,
     RecipeItemComponent,
-    BasicHighlightDirective
+    BasicHighlightDirective,
+    UnlessDirective
   ],
   imports: [
     BrowserModule,
