@@ -1,21 +1,11 @@
 <div class="row">
   <div class="col-sm-5">
-    <app-recipe-list (selectedRecipe2)="onSelectedRecipe3($event)"></app-recipe-list>
+    <app-recipe-list></app-recipe-list>
   </div>
   <div class="col-sm-7">
     <app-recipe-detail *ngIf="selectedRecipe; else infoText" [finalSelectedRecipe]="selectedRecipe"></app-recipe-detail>
     <ng-template #infoText>
       <p appBasicHighlight [defaultColor]="'blue'" [highLightColor]="'pink'">Please select Recipe!!!</p>
     </ng-template>
-
-    <p *appUnless="!selectedRecipe" appBasicHighlight [defaultColor]="'blue'" [highLightColor]="'pink'">Please select Recipe!!!
-    </p>
-    <div [ngSwitch]="switchTest">
-      <p *ngSwitchCase="1">value is 1.</p>
-      <p *ngSwitchCase="2">value is 2.</p>
-      <p *ngSwitchCase="3">value is 3.</p>
-      <p *ngSwitchCase="4">value is 4.</p>
-      <p *ngSwitchDefault >value is default.</p>
-    </div>
   </div>
 </div>
