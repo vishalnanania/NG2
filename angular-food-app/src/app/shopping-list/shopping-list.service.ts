@@ -4,10 +4,7 @@ import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable()
 export class ShoppingListService {
-  ingredients: Ingredient[] = [
-      new Ingredient('Tomato',5),
-      new Ingredient('Cucumber',5),
-  ];
+  ingredients: Ingredient[] = [];
 
   constructor() { }
 
@@ -16,8 +13,11 @@ export class ShoppingListService {
   }
 
   addIngredient(ingredient: Ingredient){
-    console.log(ingredient);
     this.ingredients.push(ingredient);
+  }
+
+  addIngredients(ingredients){
+    this.ingredients.push(...ingredients);
   }
 
 }
