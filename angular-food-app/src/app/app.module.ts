@@ -15,6 +15,8 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { BasicHighlightDirective } from './directive/basic-highlight.directive';
 import { UnlessDirective } from './directive/unless.directive';
 
+import { AppRoutingModule } from './app.routing.module';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { UnlessDirective } from './directive/unless.directive';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [RecipeService, ShoppingListService],
   bootstrap: [AppComponent]
