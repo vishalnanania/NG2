@@ -17,6 +17,7 @@ import { UnlessDirective } from './directive/unless.directive';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 import { AppRoutingModule } from './app.routing.module';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AppRoutingModule } from './app.routing.module';
     RecipeItemComponent,
     BasicHighlightDirective,
     UnlessDirective,
-    RecipeStartComponent
+    RecipeStartComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
