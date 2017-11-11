@@ -14,6 +14,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { BasicHighlightDirective } from './directive/basic-highlight.directive';
 import { UnlessDirective } from './directive/unless.directive';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 import { AppRoutingModule } from './app.routing.module';
 
@@ -29,7 +30,8 @@ import { AppRoutingModule } from './app.routing.module';
     ShoppingEditComponent,
     RecipeItemComponent,
     BasicHighlightDirective,
-    UnlessDirective
+    UnlessDirective,
+    RecipeStartComponent
   ],
   imports: [
     BrowserModule,
