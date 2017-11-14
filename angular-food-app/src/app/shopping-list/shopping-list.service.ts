@@ -30,4 +30,8 @@ export class ShoppingListService {
     this.ingredients.push(...ingredients);
   }
 
+  editIngredient(index: number, ingredient: Ingredient){
+    this.ingredients[index] = ingredient;
+  }
+
 }
