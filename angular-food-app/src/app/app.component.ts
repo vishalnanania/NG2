@@ -43,6 +43,11 @@ export class AppComponent {
       (error: string)=>{ console.log(error);},
       ()=>{ console.log("completed");}
     );
+
+    setTimeout(()=>{
+      this.myNumberSubscription.unsubscribe();
+      this.myCustNumberSubscription.unsubscribe();
+    },10000);
   }
 
   NgOnDestroy(){
