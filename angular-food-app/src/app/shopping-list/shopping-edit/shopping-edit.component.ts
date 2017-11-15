@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { NgForm } from '@angular/forms';
 
 import { Ingredient } from '../../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -8,19 +11,42 @@ import { Ingredient } from '../../shared/ingredient.model';
   styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit {
-  @ViewChild('nameInput') nameInput;
-  @ViewChild('amountInput') amountInput;
-  @Output() addItemToShoppingList = new EventEmitter<{}>();
-  constructor() { }
+  @ViewChild('f') editForm: NgForm;
+  selectedEditIngredient: Ingredient;
+  editSubscription: Subscription;
+  editMode = false;
+  editIndex: number;
 
-  onAdd(){
-    console.log(this.nameInput.nativeElement.value);
-    console.log(this.amountInput.nativeElement.value);
-    this.addItemToShoppingList.emit(new Ingredient(this.nameInput.nativeElement.value,this.amountInput.nativeElement.value));
+  constructor(private shoppingListService: ShoppingListService) {
+
+  }
+
+  onAdd(form: NgForm){
+    const formData = form.value;
+    if(this.editMode){
+      this.shoppingListService.editIngredient(this.editIndex, new Ingredient(formData.name,formData.amount));
+    }else{
+      this.shoppingListService.addIngredient(new Ingredient(formData.name,formData.amount));
+    }
   };
 
   ngOnInit() {
+    this.editSubscription = this.shoppingListService.editStarted
+      .subscribe(
+        (index)=>{
+          this.editMode = true;
+          this.editIndex = index;
+          this.selectedEditIngredient = this.shoppingListService.getIngredientByIndex(index);
+          this.editForm.setValue({
+            name: this.selectedEditIngredient.name,
+            amount: this.selectedEditIngredient.amount
+          })
+        }
+      );
+  }
 
+  ngOnDestroy(){
+    this.editSubscription.unsubscribe();
   }
 
 }

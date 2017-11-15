@@ -1,4 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,11 +8,20 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor() { }
+  loginButton = false;
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.getLoginStatus();
   }
 
-  @Output() linkClicked = new EventEmitter<{}>();
+  onLogin(){
+    this.loginButton = !this.loginButton;
+    if(!this.authService.getLoginStatus()){
+      this.authService.login();
+    }else{
+      this.authService.logout();
+    }
+  }
 
 }
