@@ -22,6 +22,7 @@ import { BasicHighlightDirective } from './directive/basic-highlight.directive';
 import { UnlessDirective } from './directive/unless.directive';
 
 import { AuthGuardService } from './shared/auth-guard.service';
+import { AuthDeactvateGuardService } from './shared/auth-deactvate-guard.service';
 import { AuthService } from './shared/auth.service';
 
 import { LoginComponent } from './login/login.component';
@@ -50,7 +51,7 @@ import { AppRoutingModule } from './app.routing.module';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [RecipeService, ShoppingListService, AuthGuardService, AuthService],
+  providers: [RecipeService, ShoppingListService, AuthGuardService, AuthService, AuthDeactvateGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

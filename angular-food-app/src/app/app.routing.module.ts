@@ -10,10 +10,11 @@ import { ShoppingListComponent} from './shopping-list/shopping-list.component';
 import { LoginComponent} from './login/login.component';
 
 import { AuthGuardService} from './shared/auth-guard.service';
+import { AuthDeactvateGuardService} from './shared/auth-deactvate-guard.service';
 
 const appRoutes: Routes = [
   {path:'login', component: LoginComponent},
-  {path:'recipes', component: RecipesComponent, children: [
+  {path:'recipes', canDeactivate: [AuthDeactvateGuardService], component: RecipesComponent, children: [
     {path: '', component: RecipeStartComponent},
     {path: 'new', component: RecipeEditComponent},
     {path: ':id', canActivate:[AuthGuardService], component: RecipeDetailComponent},
