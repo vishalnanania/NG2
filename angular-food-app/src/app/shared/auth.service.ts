@@ -8,6 +8,10 @@ export class AuthService {
 
   }
 
+  getLoginStatus(){
+    return this.loggedIn;
+  }
+
   login(){
     this.loggedIn = true;
   }

@@ -16,7 +16,7 @@ export class AuthGuardService {
           if(authenticated){
             return true;
           }else{
-            return this.router.navigate(['/']);
+            this.router.navigate(['/']);
           }
        });
   }

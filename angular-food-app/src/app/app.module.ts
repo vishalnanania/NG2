@@ -24,7 +24,10 @@ import { UnlessDirective } from './directive/unless.directive';
 import { AuthGuardService } from './shared/auth-guard.service';
 import { AuthService } from './shared/auth.service';
 
+import { LoginComponent } from './login/login.component';
+
 import { AppRoutingModule } from './app.routing.module';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { AppRoutingModule } from './app.routing.module';
     BasicHighlightDirective,
     UnlessDirective,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
