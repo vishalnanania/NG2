@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from './auth.service';
@@ -16,9 +16,13 @@ export class AuthGuardService {
           if(authenticated){
             return true;
           }else{
-            this.router.navigate(['/']);
+            return this.router.navigate(['/']);
           }
        });
   }
 
+  canActivateChild(route: ActivatedRouteSnapshot,
+                state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return this.canActivate(route, state);
+  }
 }

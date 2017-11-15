@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AuthService {
-  loggedIn = false;
+  loggedIn = true;
 
   constructor(){
 
@@ -21,7 +21,7 @@ export class AuthService {
       (resolve, reject)=>{
         setTimeout(()=>{
           resolve(this.loggedIn);
-        },1000);
+        },100);
       }
     );
     return promise;
