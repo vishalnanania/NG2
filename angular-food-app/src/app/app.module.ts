@@ -30,6 +30,8 @@ import { LoginComponent } from './login/login.component';
 
 import { AppRoutingModule } from './app.routing.module';
 
+import { ShortenPipe } from './pipe/shorten.pipe';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { AppRoutingModule } from './app.routing.module';
     UnlessDirective,
     RecipeStartComponent,
     RecipeEditComponent,
-    LoginComponent
+    LoginComponent,
+    ShortenPipe
   ],
   imports: [
     BrowserModule,

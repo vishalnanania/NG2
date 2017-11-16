@@ -7,7 +7,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class RecipeStartComponent implements OnInit {
-
+  msg = 'Please select Recipe!!!';
   constructor() { }
 
   ngOnInit() {
