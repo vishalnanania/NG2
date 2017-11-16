@@ -5,6 +5,7 @@ import { RecipesComponent} from './recipes/recipes.component';
 import { RecipeStartComponent} from './recipes/recipe-start/recipe-start.component';
 import { RecipeDetailComponent} from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeDetailResolverService } from './recipes/recipe-detail/recipe-detail-resolver.service';
 import { ShoppingListComponent} from './shopping-list/shopping-list.component';
 
 import { LoginComponent} from './login/login.component';
@@ -17,7 +18,7 @@ const appRoutes: Routes = [
   {path:'recipes', canDeactivate: [AuthDeactvateGuardService], component: RecipesComponent, children: [
     {path: '', component: RecipeStartComponent},
     {path: 'new', component: RecipeEditComponent},
-    {path: ':id', canActivate:[AuthGuardService], component: RecipeDetailComponent},
+    {path: ':id', canActivate:[AuthGuardService], resolve:{recipe: RecipeDetailResolverService}, component: RecipeDetailComponent},
     {path: ':id/edit', component: RecipeEditComponent}
   ]},
   {path:'shopping-list', component: ShoppingListComponent},

@@ -13,6 +13,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeService } from './recipes/recipe.service';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
+import { RecipeDetailResolverService } from './recipes/recipe-detail/recipe-detail-resolver.service';
 
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
@@ -51,7 +52,7 @@ import { AppRoutingModule } from './app.routing.module';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [RecipeService, ShoppingListService, AuthGuardService, AuthService, AuthDeactvateGuardService],
+  providers: [RecipeService, RecipeDetailResolverService, ShoppingListService, AuthGuardService, AuthService, AuthDeactvateGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
