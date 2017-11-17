@@ -9,8 +9,8 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a>Manage<span class="caret"></span></a></li>
-      <li><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a (click)="onLogin()">{{loginButton?'Login':'Logout'}}<span class="glyphicon glyphicon-log-in"></span></a></li>
+      <li routerLinkActive="active"><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
     </ul>
   </div>
 </nav>

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import { HttpModule }   from '@angular/http';
 
 import { AppComponent } from './app.component';
 
@@ -27,10 +28,14 @@ import { AuthDeactvateGuardService } from './shared/auth-deactvate-guard.service
 import { AuthService } from './shared/auth.service';
 
 import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login.service';
 
 import { AppRoutingModule } from './app.routing.module';
 
 import { ShortenPipe } from './pipe/shorten.pipe';
+
+import { SignupComponent } from './signup/signup.component';
+import { SignupService } from './signup/signup.service';
 
 
 @NgModule({
@@ -48,14 +53,16 @@ import { ShortenPipe } from './pipe/shorten.pipe';
     RecipeStartComponent,
     RecipeEditComponent,
     LoginComponent,
-    ShortenPipe
+    ShortenPipe,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     AppRoutingModule
   ],
-  providers: [RecipeService, RecipeDetailResolverService, ShoppingListService, AuthGuardService, AuthService, AuthDeactvateGuardService],
+  providers: [SignupService, LoginService, RecipeService, RecipeDetailResolverService, ShoppingListService, AuthGuardService, AuthService, AuthDeactvateGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

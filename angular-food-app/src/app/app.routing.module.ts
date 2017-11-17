@@ -9,12 +9,14 @@ import { RecipeDetailResolverService } from './recipes/recipe-detail/recipe-deta
 import { ShoppingListComponent} from './shopping-list/shopping-list.component';
 
 import { LoginComponent} from './login/login.component';
+import { SignupComponent} from './signup/signup.component';
 
 import { AuthGuardService} from './shared/auth-guard.service';
 import { AuthDeactvateGuardService} from './shared/auth-deactvate-guard.service';
 
 const appRoutes: Routes = [
   {path:'login', component: LoginComponent},
+  {path:'signup', component: SignupComponent},
   {path:'recipes', canDeactivate: [AuthDeactvateGuardService], component: RecipesComponent, children: [
     {path: '', component: RecipeStartComponent},
     {path: 'new', component: RecipeEditComponent},

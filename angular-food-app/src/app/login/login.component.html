@@ -1,1 +1,18 @@
-<h4 appBasicHighlight [defaultColor]="'blue'" [highLightColor]="'pink'">Please Login!!!</h4>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="row">
+    <div class="col-xs-12 form-group">
+      <label for="uname">User Name:</label>
+      <input type="text" class="form-control" id="uname" name="uname" ngModel required>
+    </div>
+    <div class="col-xs-12 form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" name="password" ngModel required>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <button type="submit" class="btn btn-success" [disabled]="!f.valid">Login</button>
+      <button type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
+    </div>
+  </div>
+</form>
