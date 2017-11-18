@@ -15,8 +15,7 @@ import { AuthGuardService} from './shared/auth-guard.service';
 import { AuthDeactvateGuardService} from './shared/auth-deactvate-guard.service';
 
 const appRoutes: Routes = [
-  {path:'login', component: LoginComponent},
-  {path:'signup', component: SignupComponent},
+  {path:'', redirectTo: '/recipes', pathMatch: 'full'},
   {path:'recipes', component: RecipesComponent, children: [
     {path: '', component: RecipeStartComponent},
     {path: 'new', component: RecipeEditComponent},
@@ -24,7 +23,8 @@ const appRoutes: Routes = [
     {path: ':id/edit', component: RecipeEditComponent}
   ]},
   {path:'shopping-list', component: ShoppingListComponent},
-  {path:'', redirectTo: '/recipes', pathMatch: 'full'},
+  {path:'login', component: LoginComponent},
+  {path:'signup', component: SignupComponent},
   {path:'**', redirectTo: 'recipes'}
 ];
 

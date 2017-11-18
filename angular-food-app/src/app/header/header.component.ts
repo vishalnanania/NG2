@@ -50,7 +50,6 @@ export class HeaderComponent implements OnInit {
     }).subscribe((recipes)=>{
       console.log(recipes);
       this.recipeService.setRecipes(recipes);
-      this.router.navigate(['../'], {relativeTo: this.route});
     });
   }
 
