@@ -8,7 +8,14 @@
       <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a>Manage<span class="caret"></span></a></li>
+      <li class="dropdown pointer">
+        <a class="dropdown-toggle" data-toggle="dropdown">Manage
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a class="pointer" (click)="onSaveRecipes()">Save Recipe</a></li>
+          <li><a class="pointer" (click)="onFetchRecipes()">Fetch Recipe</a></li>
+        </ul>
+      </li>
       <li routerLinkActive="active"><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
     </ul>

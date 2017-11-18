@@ -1,4 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Http } from '@angular/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
@@ -8,7 +11,7 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 export class RecipeService {
   selectedRecipe = new EventEmitter<Recipe>();
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService, private http: Http, private router: Router, private route: ActivatedRoute) { }
 
   private recipes: Recipe[] = [
         new Recipe('Subway',
@@ -40,10 +43,24 @@ export class RecipeService {
                   )
   ];
 
+  public recipesChanged = new Subject<any[]>();
   private newRecipe: Recipe = new Recipe('','','',[new Ingredient('', 1)]);
 
   getRecipes(){
     return this.recipes;
+  }
+
+  saveRecipes (recipes){
+    return this.http.put('https://food-app-2717.firebaseio.com/recipes.json', recipes);
+  }
+
+  setRecipes(recipes){
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes);
+  }
+
+  fetchRecipes (){
+    return this.http.get('https://food-app-2717.firebaseio.com/recipes.json');
   }
 
   getRecipeById(index: number){
