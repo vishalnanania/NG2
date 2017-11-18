@@ -17,7 +17,7 @@ import { AuthDeactvateGuardService} from './shared/auth-deactvate-guard.service'
 const appRoutes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'signup', component: SignupComponent},
-  {path:'recipes', canDeactivate: [AuthDeactvateGuardService], component: RecipesComponent, children: [
+  {path:'recipes', component: RecipesComponent, children: [
     {path: '', component: RecipeStartComponent},
     {path: 'new', component: RecipeEditComponent},
     {path: ':id', canActivate:[AuthGuardService], resolve:{recipe: RecipeDetailResolverService}, component: RecipeDetailComponent},
