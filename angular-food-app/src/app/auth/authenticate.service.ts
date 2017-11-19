@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 export class AuthenticateService {
 
   constructor(private router: Router) { }
-  token: string = '';
+  token: string;
   signupUser(email, password){
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((response)=>{
@@ -23,7 +23,7 @@ export class AuthenticateService {
   signInUser(email, password){
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((response)=>{
-        firebase.auth().currentUser.getToken().then(
+        firebase.auth().currentUser.getIdToken().then(
           (token)=>{
             this.token = token;
             this.router.navigate(['/recipe']);
@@ -38,12 +38,21 @@ export class AuthenticateService {
   }
 
   getToken(){
-    firebase.auth().currentUser.getToken().then(
+    firebase.auth().currentUser.getIdToken().then(
       (token)=>{
         this.token = token;
       }
     );
     return this.token;
+  }
+
+  isAuthenticated(){
+    return this.token != null;
+  }
+
+  logout(){
+    firebase.auth().signOut();
+    this.token = null;
   }
 
 }

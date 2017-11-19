@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AuthService } from '../shared/auth.service';
+import { AuthenticateService } from '../auth/authenticate.service';
 import { RecipeService } from '../recipes/recipe.service';
 
 @Component({
@@ -12,21 +12,10 @@ import { RecipeService } from '../recipes/recipe.service';
 })
 export class HeaderComponent implements OnInit {
   loginButton = false;
-  constructor(private authService: AuthService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.authService.getLoginStatus();
-
     this.onFetchRecipes();
-  }
-
-  onLogin(){
-    this.loginButton = !this.loginButton;
-    if(!this.authService.getLoginStatus()){
-      this.authService.login();
-    }else{
-      this.authService.logout();
-    }
   }
 
   onSaveRecipes(){
@@ -51,6 +40,11 @@ export class HeaderComponent implements OnInit {
       console.log(recipes);
       this.recipeService.setRecipes(recipes);
     });
+  }
+
+  onLogout(){
+    this.authenticateService.logout();
+    this.router.navigate(['../login']);
   }
 
 }
