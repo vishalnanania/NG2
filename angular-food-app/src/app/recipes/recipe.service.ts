@@ -6,12 +6,13 @@ import { Subject } from 'rxjs/Subject';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { AuthenticateService } from '../auth/authenticate.service';
 
 @Injectable()
 export class RecipeService {
   selectedRecipe = new EventEmitter<Recipe>();
 
-  constructor(private shoppingListService: ShoppingListService, private http: Http, private router: Router, private route: ActivatedRoute) { }
+  constructor(private shoppingListService: ShoppingListService, private authenticateService: AuthenticateService, private http: Http, private router: Router, private route: ActivatedRoute) { }
 
   private recipes: Recipe[] = [
         new Recipe('Subway',
@@ -51,7 +52,8 @@ export class RecipeService {
   }
 
   saveRecipes (recipes){
-    return this.http.put('https://food-app-2717.firebaseio.com/recipes.json', recipes);
+    const token = this.authenticateService.getToken();
+    return this.http.put('https://food-app-2717.firebaseio.com/recipes.json?auth='+ token, recipes);
   }
 
   setRecipes(recipes){
@@ -60,7 +62,8 @@ export class RecipeService {
   }
 
   fetchRecipes (){
-    return this.http.get('https://food-app-2717.firebaseio.com/recipes.json');
+    const token = this.authenticateService.getToken();
+    return this.http.get('https://food-app-2717.firebaseio.com/recipes.json?auth='+ token);
   }
 
   getRecipeById(index: number){

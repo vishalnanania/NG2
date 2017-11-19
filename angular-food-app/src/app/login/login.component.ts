@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { LoginService } from './login.service';
+import { AuthenticateService } from '../auth/authenticate.service';
 
 @Component({
   selector: 'app-login',
@@ -12,18 +12,13 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') loginFrom: NgForm;
   statusMsg = '';
 
-  constructor(private loginService: LoginService) { }
+  constructor(private authenticateService: AuthenticateService) { }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    this.loginService.login(this.loginFrom.value)
-      .subscribe(
-      (response)=>{
-      },(error)=>{
-        this.statusMsg = 'Server is down. Please try again later.';
-      });
+    this.authenticateService.signInUser(this.loginFrom.value.email, this.loginFrom.value.password);
   }
 
   onClear(){

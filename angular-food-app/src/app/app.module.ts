@@ -36,6 +36,7 @@ import { ShortenPipe } from './pipe/shorten.pipe';
 
 import { SignupComponent } from './signup/signup.component';
 import { SignupService } from './signup/signup.service';
+import { AuthenticateService } from './auth/authenticate.service';
 
 
 @NgModule({
@@ -62,7 +63,7 @@ import { SignupService } from './signup/signup.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [SignupService, LoginService, RecipeService, RecipeDetailResolverService, ShoppingListService, AuthGuardService, AuthService, AuthDeactvateGuardService],
+  providers: [SignupService, LoginService, AuthenticateService, RecipeService, RecipeDetailResolverService, ShoppingListService, AuthGuardService, AuthService, AuthDeactvateGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
