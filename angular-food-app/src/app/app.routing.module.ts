@@ -18,9 +18,9 @@ const appRoutes: Routes = [
   {path:'', redirectTo: '/recipes', pathMatch: 'full'},
   {path:'recipes', component: RecipesComponent, children: [
     {path: '', component: RecipeStartComponent},
-    {path: 'new', component: RecipeEditComponent},
-    {path: ':id', canActivate:[AuthGuardService], resolve:{recipe: RecipeDetailResolverService}, component: RecipeDetailComponent},
-    {path: ':id/edit', component: RecipeEditComponent}
+    {path: 'new', component: RecipeEditComponent, canActivate:[AuthGuardService]},
+    {path: ':id', resolve:{recipe: RecipeDetailResolverService}, component: RecipeDetailComponent},
+    {path: ':id/edit', component: RecipeEditComponent, canActivate:[AuthGuardService]}
   ]},
   {path:'shopping-list', component: ShoppingListComponent},
   {path:'login', component: LoginComponent},

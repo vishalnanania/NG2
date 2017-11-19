@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.onFetchRecipes();
+    //this.onFetchRecipes();
   }
 
   onSaveRecipes(){
