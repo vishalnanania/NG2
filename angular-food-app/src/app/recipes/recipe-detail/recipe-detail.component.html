@@ -15,11 +15,16 @@
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Manage Recipe
         <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a (click)="addIngredientsToShoppingList()">Shopping List</a></li>
-        <li><a (click)="editRecipe()">Edit Recipe</a></li>
-        <li><a>Delete Recipe</a></li>
+        <li><a class="pointer" (click)="addIngredientsToShoppingList()">Shopping List</a></li>
+        <li><a class="pointer" (click)="editRecipe()">Edit Recipe</a></li>
+        <li><a class="pointer" (click)="deleteRecipe()">Delete Recipe</a></li>
       </ul>
     </div>
+  </div>
+</div>
+<div class="row margin-top">
+  <div class="col-xs-12">
+    <label>Ingredients:</label>
   </div>
 </div>
 <div class="row">

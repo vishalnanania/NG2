@@ -1,16 +1,22 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand">Recipe Book</a>
-    </div>
     <ul class="nav navbar-nav">
+      <li routerLinkActive="active"><a class="navbar-brand" routerLink="/home">Recipe Book</a></li>
       <li routerLinkActive="active"><a routerLink="/recipes">Recipes</a></li>
       <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a>Manage<span class="caret"></span></a></li>
-      <li><a><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a (click)="onLogin()">{{loginButton?'Login':'Logout'}}<span class="glyphicon glyphicon-log-in"></span></a></li>
+      <li class="dropdown pointer" *ngIf="authenticateService.isAuthenticated()">
+        <a class="dropdown-toggle" data-toggle="dropdown">Manage
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a class="pointer" (click)="onSaveRecipes()">Save Recipe</a></li>
+          <li><a class="pointer" (click)="onFetchRecipes()">Fetch Recipe</a></li>
+        </ul>
+      </li>
+      <li routerLinkActive="active" *ngIf="!authenticateService.isAuthenticated()"><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li routerLinkActive="active" *ngIf="!authenticateService.isAuthenticated()"><a routerLink="/login">Login</a></li>
+      <li class="pointer" *ngIf="authenticateService.isAuthenticated()"><a (click)="onLogout()">Logout</a></li>
     </ul>
   </div>
 </nav>

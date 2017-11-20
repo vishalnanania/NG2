@@ -1,3 +1,62 @@
-<p>
-  recipe-edit works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="editRecipe.name" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image URL:</label>
+            <input type="text" class="form-control" id="imagePath" name="imagePath" [(ngModel)]="editRecipe.imagePath" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="editRecipe.imagePath" alt="Recipe Image" class="img-responsive" style="max-height: 100px;">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" [(ngModel)]="editRecipe.description" required></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <label>Ingredients:</label>
+        </div>
+      </div>
+      <div class="row margin-top" *ngFor="let ingredient of editRecipe.ingredients; let i = index">
+        <div class="col-xs-9">
+          <input type="text" class="form-control" name="ingredient{{i}}" [(ngModel)]="ingredient.name" required>
+        </div>
+        <div class="col-xs-2">
+          <input type="number" class="form-control" name="amount{{i}}" [(ngModel)]="ingredient.amount" pattern="^[1-9]+[0-9]*$" required>
+        </div>
+        <div class="col-xs-1">
+          <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+        </div>
+      </div>
+      <div class="row margin-top">
+        <div class="col-xs-12">
+          <button type="button" class="btn btn-primary" (click)="addIngredient()">Add Ingredient</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

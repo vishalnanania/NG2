@@ -1,55 +1,93 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Http } from '@angular/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { AuthenticateService } from '../auth/authenticate.service';
 
 @Injectable()
 export class RecipeService {
-    selectedRecipe = new EventEmitter<Recipe>();
+  selectedRecipe = new EventEmitter<Recipe>();
 
-    constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService, private authenticateService: AuthenticateService, private http: Http, private router: Router, private route: ActivatedRoute) { }
 
-    private recipes: Recipe[] = [
-          new Recipe('Subway',
-                  'vegetable footlong',
-                  'https://i.pinimg.com/originals/d0/c9/53/d0c95321eb3c28ffdd880593ef1305d3.jpg',
-                  [ new Ingredient('Bread',1),
-                    new Ingredient('Tomato',8),
-                    new Ingredient('Banana Papers',4),
+  private recipes: Recipe[] = [
+        new Recipe('Subway',
+                'vegetable footlong',
+                'https://i.pinimg.com/originals/d0/c9/53/d0c95321eb3c28ffdd880593ef1305d3.jpg',
+                [ new Ingredient('Bread',1),
+                  new Ingredient('Tomato',8),
+                  new Ingredient('Banana Papers',4),
+                  new Ingredient('Cucumber',8),
+                  new Ingredient('Lettuce',10),
+                  new Ingredient('Onion',4),
+                  new Ingredient('Pickle',4),
+                  new Ingredient('American Cheese',4),
+                  new Ingredient('Chipotle Southwest',2),
+                ]
+                ),
+        new Recipe('Burger',
+                  'vegetable Burger',
+                  'http://bk-apac-prd.s3.amazonaws.com/sites/burgerking.co.nz/files/BK_Salad-Burger-Detail.png',
+                  [ new Ingredient('Buns',1),
+                    new Ingredient('Tomato',3),
+                    new Ingredient('Patty',1),
                     new Ingredient('Cucumber',8),
-                    new Ingredient('Lettuce',10),
-                    new Ingredient('Onion',4),
-                    new Ingredient('Pickle',4),
-                    new Ingredient('American Cheese',4),
-                    new Ingredient('Chipotle Southwest',2),
+                    new Ingredient('Lettuce',5),
+                    new Ingredient('Onion',3),
+                    new Ingredient('Pickle',3),
+                    new Ingredient('American Cheese',2)
                   ]
-                  ),
-          new Recipe('Burger',
-                    'vegetable Burger',
-                    'http://bk-apac-prd.s3.amazonaws.com/sites/burgerking.co.nz/files/BK_Salad-Burger-Detail.png',
-                    [ new Ingredient('Buns',1),
-                      new Ingredient('Tomato',3),
-                      new Ingredient('Patty',1),
-                      new Ingredient('Cucumber',8),
-                      new Ingredient('Lettuce',5),
-                      new Ingredient('Onion',3),
-                      new Ingredient('Pickle',3),
-                      new Ingredient('American Cheese',2)
-                    ]
-                    )
-    ];
+                  )
+  ];
 
-    getRecipes(){
-        return this.recipes.slice();
-    }
+  public recipesChanged = new Subject<any[]>();
+  private newRecipe: Recipe = new Recipe('','','',[new Ingredient('', 1)]);
 
-    getRecipeById(index: number){
-      return this.recipes[index];
-    }
+  getRecipes(){
+    return this.recipes;
+  }
 
-    addIngredientsToShoppingList(ingredients){
-        this.shoppingListService.addIngredients(ingredients);
-    }
+  saveRecipes (recipes){
+    const token = this.authenticateService.getToken();
+    return this.http.put('https://food-app-2717.firebaseio.com/recipes.json?auth='+ token, recipes);
+  }
+
+  setRecipes(recipes){
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes);
+  }
+
+  fetchRecipes (){
+    const token = this.authenticateService.getToken();
+    return this.http.get('https://food-app-2717.firebaseio.com/recipes.json?auth='+ token);
+  }
+
+  getRecipeById(index: number){
+    return this.recipes[index];
+  }
+
+  addIngredientsToShoppingList(ingredients){
+    this.shoppingListService.addIngredients(ingredients);
+  }
+
+  getNewRecipe(){
+    return this.newRecipe;
+  }
+
+  updateRecipe(index: number, recipe: Recipe){
+    this.recipes[index] = recipe;
+  }
+
+  addRecipe(recipe: Recipe){
+    this.recipes.push(recipe);
+  }
+
+  deleteRecipe(index: number){
+    this.recipes.splice(index, 1);
+  }
 
 }

@@ -6,14 +6,13 @@
     </div>
     <div class="col-xs-2 form-group">
       <label for="amount">Amount:</label>
-      <input type="text" class="form-control" id="amount" name="amount" ngModel required>
+      <input type="text" class="form-control" id="amount" name="amount" pattern="^[1-9]+[0-9]*$" ngModel required>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
       <button type="submit" class="btn btn-success" [disabled]="!f.valid">{{editMode ? 'Update' : 'Add'}}</button>
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-primary">Clear</button>
+      <button type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
     </div>
   </div>
 </form>
