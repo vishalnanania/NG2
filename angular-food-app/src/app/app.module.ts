@@ -12,25 +12,23 @@ import { AuthGuardService } from './shared/auth-guard.service';
 import { AuthDeactvateGuardService } from './shared/auth-deactvate-guard.service';
 import { AppRoutingModule } from './app.routing.module';
 import { AuthenticateService } from './auth/authenticate.service';
-import { RecipesModule } from "./recipes/recipes.modules";
 import { SharedModule } from "./shared/shared.module";
-import { ShoppingListModule } from "./shopping-list/shopping-list.module";
+import { HomeComponent } from './home/home/home.component';
 import { AuthenticateModule } from "./auth/authenticate.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    RecipesModule,
     SharedModule,
-    ShoppingListModule,
     AuthenticateModule
   ],
   providers: [AuthenticateService, RecipeService, RecipeDetailResolverService, ShoppingListService, AuthGuardService, AuthDeactvateGuardService],
