@@ -1,8 +1,8 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {BasicHighlightDirective} from "../directive/basic-highlight.directive";
-import {UnlessDirective} from "../directive/unless.directive";
-import {ShortenPipe} from "../pipe/shorten.pipe";
+import {BasicHighlightDirective} from "./directive/basic-highlight.directive";
+import {UnlessDirective} from "./directive/unless.directive";
+import {ShortenPipe} from "./pipe/shorten.pipe";
 
 @NgModule({
   declarations: [
