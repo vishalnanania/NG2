@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AuthenticateService } from '../auth/authenticate.service';
-import { RecipeService } from '../recipes/recipe.service';
+import { AuthenticateService } from '../../auth/authenticate.service';
+import { RecipeService } from '../../recipes/recipe.service';
 
 @Component({
   selector: 'app-header',
