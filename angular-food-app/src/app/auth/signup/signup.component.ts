@@ -11,7 +11,7 @@ import {AuthenticateService} from "../authenticate.service";
 export class SignupComponent implements OnInit {
   @ViewChild('f') signUpFrom: NgForm;
   statusMsg = '';
-  constructor(private authenticateService:AuthenticateService) { }
+  constructor(public authenticateService:AuthenticateService) { }
 
   ngOnInit() {
   }

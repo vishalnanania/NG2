@@ -12,7 +12,7 @@ import { RecipeService } from '../../recipes/recipe.service';
 })
 export class HeaderComponent implements OnInit {
   loginButton = false;
-  constructor(private authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     //this.onFetchRecipes();

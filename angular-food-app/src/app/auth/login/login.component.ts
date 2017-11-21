@@ -11,13 +11,13 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') loginFrom: NgForm;
   statusMsg = '';
 
-  constructor(private authenticateService: AuthenticateService) { }
+  constructor(public authenticateService: AuthenticateService) { }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    this.authenticateService.signInUser(this.loginFrom.value.email, this.loginFrom.value.password);
+    this.authenticateService.signInUser(this.loginFrom.value.email , this.loginFrom.value.password);
   }
 
   onClear(){
