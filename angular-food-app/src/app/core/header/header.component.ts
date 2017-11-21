@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticateService } from '../../auth/authenticate.service';
@@ -11,7 +10,6 @@ import { RecipeService } from '../../recipes/recipe.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  loginButton = false;
   constructor(public authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -20,26 +18,12 @@ export class HeaderComponent implements OnInit {
 
   onSaveRecipes(){
     const recipes = this.recipeService.getRecipes();
-    this.recipeService.saveRecipes(recipes)
-      .subscribe((response: Response)=>{
-        console.log(response);
-        this.router.navigate(['../'], {relativeTo: this.route});
-      });
+    this.recipeService.saveRecipes(recipes);
+
   }
 
   onFetchRecipes(){
-    this.recipeService.fetchRecipes().map((response)=>{
-      const recipes = response.json();
-      recipes.forEach((recipe)=>{
-        if(!recipe['ingredients']){
-          recipe.ingredients = [];
-        }
-      });
-      return recipes;
-    }).subscribe((recipes)=>{
-      console.log(recipes);
-      this.recipeService.setRecipes(recipes);
-    });
+    this.recipeService.fetchRecipes();
   }
 
   onLogout(){
