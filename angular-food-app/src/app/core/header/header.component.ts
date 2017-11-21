@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AuthenticateService } from '../auth/authenticate.service';
-import { RecipeService } from '../recipes/recipe.service';
+import { AuthenticateService } from '../../auth/authenticate.service';
+import { RecipeService } from '../../recipes/recipe.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ import { RecipeService } from '../recipes/recipe.service';
 })
 export class HeaderComponent implements OnInit {
   loginButton = false;
-  constructor(private authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     //this.onFetchRecipes();

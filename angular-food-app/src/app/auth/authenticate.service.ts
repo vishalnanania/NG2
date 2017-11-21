@@ -7,7 +7,7 @@ export class AuthenticateService {
 
   constructor(private router: Router) { }
   token: string;
-  signupUser(email, password){
+  signupUser(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((response)=>{
         alert(`You are successfully registered. Please login now.`);
@@ -20,7 +20,7 @@ export class AuthenticateService {
     );
   }
 
-  signInUser(email, password){
+  signInUser(email: string, password: string){
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((response)=>{
         firebase.auth().currentUser.getIdToken().then(

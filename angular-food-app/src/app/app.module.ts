@@ -4,24 +4,15 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule }   from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { RecipeService } from './recipes/recipe.service';
-import { RecipeDetailResolverService } from './recipes/recipe-detail/recipe-detail-resolver.service';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { AuthGuardService } from './shared/auth-guard.service';
-import { AuthDeactvateGuardService } from './shared/auth-deactvate-guard.service';
 import { AppRoutingModule } from './app.routing.module';
-import { AuthenticateService } from './auth/authenticate.service';
 import { SharedModule } from "./shared/shared.module";
-import { HomeComponent } from './home/home/home.component';
 import { AuthenticateModule } from "./auth/authenticate.module";
+import { CoreModule } from "./core/core.module";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +20,10 @@ import { AuthenticateModule } from "./auth/authenticate.module";
     HttpModule,
     AppRoutingModule,
     SharedModule,
-    AuthenticateModule
+    AuthenticateModule,
+    CoreModule
   ],
-  providers: [AuthenticateService, RecipeService, RecipeDetailResolverService, ShoppingListService, AuthGuardService, AuthDeactvateGuardService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
