@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 
@@ -53,7 +53,14 @@ export class RecipeService {
 
   saveRecipes (recipes){
     const token = this.authenticateService.getToken();
-    return this.httpClient.put('https://food-app-2717.firebaseio.com/recipes.json?auth='+ token, recipes).subscribe((response: Response)=>{
+    return this.httpClient.put(
+      'https://food-app-2717.firebaseio.com/recipes.json',
+      recipes,
+      {
+        params: new HttpParams().set('auth', token),
+        //headers: new HttpHeaders().set('key', value)
+      }
+    ).subscribe((response: Response)=>{
       console.log(response);
       this.router.navigate(['../'], {relativeTo: this.route});
     });
@@ -61,7 +68,12 @@ export class RecipeService {
 
   fetchRecipes (){
     const token = this.authenticateService.getToken();
-    this.httpClient.get('https://food-app-2717.firebaseio.com/recipes.json?auth='+ token).subscribe((recipes: Recipe[])=>{
+    this.httpClient.get(
+      'https://food-app-2717.firebaseio.com/recipes.json?auth='+ token,
+      {
+        params: new HttpParams().set('auth', token)
+      }
+    ).subscribe((recipes: Recipe[])=>{
       for(let recipe of recipes) {
         if(!recipe['ingredients']){
           recipe.ingredients = [];
