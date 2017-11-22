@@ -52,7 +52,7 @@ export class RecipeService {
   }
 
   saveRecipes (recipes){
-    const token = this.authenticateService.getToken();
+    //const token = this.authenticateService.getToken();
     // const req = new HttpRequest(
     //     'PUT',
     //     'https://food-app-2717.firebaseio.com/recipes.json',
@@ -71,23 +71,16 @@ export class RecipeService {
 
     return this.httpClient.put(
       'https://food-app-2717.firebaseio.com/recipes.json',
-      recipes,
-      {
-        params: new HttpParams().set('auth', token),
-        //headers: new HttpHeaders().set('key', value)
-      }
+      recipes
     ).subscribe((response: Response)=>{
       this.router.navigate(['../'], {relativeTo: this.route});
     });
   }
 
   fetchRecipes (){
-    const token = this.authenticateService.getToken();
+    //const token = this.authenticateService.getToken();
     this.httpClient.get(
-      'https://food-app-2717.firebaseio.com/recipes.json?auth='+ token,
-      {
-        params: new HttpParams().set('auth', token)
-      }
+      'https://food-app-2717.firebaseio.com/recipes.json'
     ).subscribe((recipes: Recipe[])=>{
       for(let recipe of recipes) {
         if(!recipe['ingredients']){
