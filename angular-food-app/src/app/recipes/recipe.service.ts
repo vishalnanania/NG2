@@ -58,6 +58,7 @@ export class RecipeService {
     //     'https://food-app-2717.firebaseio.com/recipes.json',
     //      recipes,
     //     {
+    //       reportProgress: true,
     //       params: new HttpParams().set('auth', token),
     //      //headers: new HttpHeaders().set('key', value)
     //     }
