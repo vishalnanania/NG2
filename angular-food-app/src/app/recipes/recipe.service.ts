@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from "@angular/common/http";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 
@@ -53,6 +53,21 @@ export class RecipeService {
 
   saveRecipes (recipes){
     const token = this.authenticateService.getToken();
+    // const req = new HttpRequest(
+    //     'PUT',
+    //     'https://food-app-2717.firebaseio.com/recipes.json',
+    //      recipes,
+    //     {
+    //       params: new HttpParams().set('auth', token),
+    //      //headers: new HttpHeaders().set('key', value)
+    //     }
+    //   );
+    // return this.httpClient.request(req)
+    //   .subscribe((response)=>{
+    //   console.log(response);
+    //   this.router.navigate(['../'], {relativeTo: this.route});
+    // });
+
     return this.httpClient.put(
       'https://food-app-2717.firebaseio.com/recipes.json',
       recipes,
