@@ -77,7 +77,6 @@ export class RecipeService {
         //headers: new HttpHeaders().set('key', value)
       }
     ).subscribe((response: Response)=>{
-      console.log(response);
       this.router.navigate(['../'], {relativeTo: this.route});
     });
   }
