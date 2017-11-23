@@ -1,18 +1,22 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from "@angular/common/http";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { Store } from "@ngrx/store";
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { AuthenticateService } from '../auth/authenticate.service';
+import * as shoppingListActions from '../shopping-list/store/shopping-list.actions';
+import * as shoppingListReducers from '../shopping-list/store/shopping-list.reducers';
+
 
 @Injectable()
 export class RecipeService {
   selectedRecipe = new EventEmitter<Recipe>();
 
-  constructor(private shoppingListService: ShoppingListService, private authenticateService: AuthenticateService, private httpClient: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private store: Store<shoppingListReducers.AppState>, private shoppingListService: ShoppingListService, private authenticateService: AuthenticateService, private httpClient: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   private recipes: Recipe[] = [
         new Recipe('Subway',
@@ -97,7 +101,8 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients){
-    this.shoppingListService.addIngredients(ingredients);
+    //this.shoppingListService.addIngredients(ingredients);
+    this.store.dispatch( new shoppingListActions.AddIngredients(ingredients));
   }
 
   getNewRecipe(){
