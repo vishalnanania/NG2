@@ -9,14 +9,14 @@ import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { AuthenticateService } from '../auth/authenticate.service';
 import * as shoppingListActions from '../shopping-list/store/shopping-list.actions';
-import * as shoppingListReducers from '../shopping-list/store/shopping-list.reducers';
+import * as appReducers from '../store/app.reducers';
 
 
 @Injectable()
 export class RecipeService {
   selectedRecipe = new EventEmitter<Recipe>();
 
-  constructor(private store: Store<shoppingListReducers.AppState>, private shoppingListService: ShoppingListService, private authenticateService: AuthenticateService, private httpClient: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private store: Store<appReducers.AppState>, private shoppingListService: ShoppingListService, private authenticateService: AuthenticateService, private httpClient: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   private recipes: Recipe[] = [
         new Recipe('Subway',
