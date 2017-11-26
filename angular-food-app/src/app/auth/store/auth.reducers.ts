@@ -32,6 +32,7 @@ export function authReducer(state= initialState, action: AuthActions
       case AuthActions.SET_TOKET:
         return{
           ...state,
+          token: action.payload
         };
       default:
         return state;

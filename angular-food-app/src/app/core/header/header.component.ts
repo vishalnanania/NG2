@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import {Observable} from "rxjs/Observable";
 
 import { AuthenticateService } from '../../auth/authenticate.service';
 import { RecipeService } from '../../recipes/recipe.service';
+import * as AppReducers from '../../store/app.reducers';
+import * as AuthReducers from '../../auth/store/auth.reducers';
+
 
 @Component({
   selector: 'app-header',
@@ -10,10 +15,11 @@ import { RecipeService } from '../../recipes/recipe.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(public authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  authState: Observable<AuthReducers.State>;
+  constructor(private store: Store<AppReducers.AppState>, public authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    //this.onFetchRecipes();
+    this.authState = this.store.select('auth');
   }
 
   onSaveRecipes(){

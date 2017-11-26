@@ -6,7 +6,7 @@
       <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown pointer" *ngIf="authenticateService.isAuthenticated()">
+      <li class="dropdown pointer" *ngIf="(authState | async).authenticated">
         <a class="dropdown-toggle" data-toggle="dropdown">Manage
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -14,9 +14,9 @@
           <li><a class="pointer" (click)="onFetchRecipes()">Fetch Recipe</a></li>
         </ul>
       </li>
-      <li routerLinkActive="active" *ngIf="!authenticateService.isAuthenticated()"><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li routerLinkActive="active" *ngIf="!authenticateService.isAuthenticated()"><a routerLink="/login">Login</a></li>
-      <li class="pointer" *ngIf="authenticateService.isAuthenticated()"><a (click)="onLogout()">Logout</a></li>
+      <li routerLinkActive="active" *ngIf="!(authState | async).authenticated"><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li routerLinkActive="active" *ngIf="!(authState | async).authenticated"><a routerLink="/login">Login</a></li>
+      <li class="pointer" *ngIf="(authState | async).authenticated"><a (click)="onLogout()">Logout</a></li>
     </ul>
   </div>
 </nav>
