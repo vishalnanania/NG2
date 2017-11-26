@@ -1,7 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import 'rxjs/Rx';
 import * as firebase from 'firebase';
 

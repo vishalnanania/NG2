@@ -6,8 +6,6 @@ import { Store } from "@ngrx/store";
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { AuthenticateService } from '../auth/authenticate.service';
 import * as shoppingListActions from '../shopping-list/store/shopping-list.actions';
 import * as appReducers from '../store/app.reducers';
 
@@ -16,7 +14,7 @@ import * as appReducers from '../store/app.reducers';
 export class RecipeService {
   selectedRecipe = new EventEmitter<Recipe>();
 
-  constructor(private store: Store<appReducers.AppState>, private shoppingListService: ShoppingListService, private authenticateService: AuthenticateService, private httpClient: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private store: Store<appReducers.AppState>, private httpClient: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   private recipes: Recipe[] = [
         new Recipe('Subway',

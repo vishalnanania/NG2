@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { Store } from "@ngrx/store";
 
 import { Ingredient } from '../../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list.service';
 import * as shoppingListActions from '../store/shopping-list.actions';
 import * as appReducers from '../../store/app.reducers';
 
@@ -19,9 +18,8 @@ export class ShoppingEditComponent implements OnInit {
   selectedEditIngredient: Ingredient;
   editSubscription: Subscription;
   editMode = false;
-  editIndex: number;
 
-  constructor(private shoppingListService: ShoppingListService, private store: Store<appReducers.AppState>) {
+  constructor(private store: Store<appReducers.AppState>) {
 
   }
 

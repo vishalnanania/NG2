@@ -15,7 +15,6 @@ import { Ingredient } from '../../shared/ingredient.model';
 export class RecipeEditComponent implements OnInit {
   @ViewChild('f') recipeForm: NgForm;
   editRecipe: Recipe;
-  newRecipe: Recipe;
   id: number;
   editMode=false;
 
