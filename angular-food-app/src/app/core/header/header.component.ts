@@ -3,10 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {Observable} from "rxjs/Observable";
 
-import { AuthenticateService } from '../../auth/authenticate.service';
 import { RecipeService } from '../../recipes/recipe.service';
 import * as AppReducers from '../../store/app.reducers';
 import * as AuthReducers from '../../auth/store/auth.reducers';
+import * as AuthActions from "../../auth/store/auth.actions";
 
 
 @Component({
@@ -16,7 +16,7 @@ import * as AuthReducers from '../../auth/store/auth.reducers';
 })
 export class HeaderComponent implements OnInit {
   authState: Observable<AuthReducers.State>;
-  constructor(private store: Store<AppReducers.AppState>, public authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private store: Store<AppReducers.AppState>, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.authState = this.store.select('auth');
@@ -33,8 +33,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(){
-    this.authenticateService.logout();
-    this.router.navigate(['../login']);
+    this.store.dispatch(new AuthActions.TryLogout());
+    // this.authenticateService.logout();
+    // this.router.navigate(['../login']);
   }
 
 }

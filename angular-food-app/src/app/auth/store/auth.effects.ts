@@ -62,6 +62,21 @@ export class AuthEffects {
       ];
     });
 
+  @Effect()
+  authLogout = this.actions$
+    .ofType(AuthActions.TRY_LOGOUT)
+    .switchMap(() => {
+      return fromPromise(firebase.auth().signOut());
+    })
+    .mergeMap(() => {
+      this.router.navigate(['/login']);
+      return [
+        {
+          type: AuthActions.LOGOUT
+        }
+      ];
+    });
+
   constructor(private actions$: Actions, private router: Router){
 
   }
