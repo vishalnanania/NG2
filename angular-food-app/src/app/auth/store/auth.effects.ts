@@ -24,7 +24,7 @@ export class AuthEffects {
     })
     .mergeMap((token) => {
       alert(`You are successfully registered.`);
-      this.router.navigate(['/']);
+      this.router.navigate(['/recipes']);
       return [
         {
           type: AuthActions.SIGNUP
@@ -50,7 +50,7 @@ export class AuthEffects {
     })
     .mergeMap((token) => {
       alert(`You are successfully logged in.`);
-      this.router.navigate(['/']);
+      this.router.navigate(['/recipes']);
       return [
         {
           type: AuthActions.LOGIN
