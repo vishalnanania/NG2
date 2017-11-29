@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import {Observable} from "rxjs/Observable";
 
-import { AuthenticateService } from '../../auth/authenticate.service';
 import { RecipeService } from '../../recipes/recipe.service';
+import * as AppReducers from '../../store/app.reducers';
+import * as AuthReducers from '../../auth/store/auth.reducers';
+import * as AuthActions from "../../auth/store/auth.actions";
+import * as RecipesActions from "../../recipes/store/recipes.actions";
+
 
 @Component({
   selector: 'app-header',
@@ -11,40 +16,28 @@ import { RecipeService } from '../../recipes/recipe.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  loginButton = false;
-  constructor(public authenticateService: AuthenticateService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  authState: Observable<AuthReducers.State>;
+  constructor(private store: Store<AppReducers.AppState>, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    //this.onFetchRecipes();
+    this.authState = this.store.select('auth');
   }
 
   onSaveRecipes(){
-    const recipes = this.recipeService.getRecipes();
-    this.recipeService.saveRecipes(recipes)
-      .subscribe((response: Response)=>{
-        console.log(response);
-        this.router.navigate(['../'], {relativeTo: this.route});
-      });
+    // const recipes = this.recipeService.getRecipes();
+    // this.recipeService.saveRecipes(recipes);
+    this.store.dispatch(new RecipesActions.StoreRecipe());
   }
 
   onFetchRecipes(){
-    this.recipeService.fetchRecipes().map((response)=>{
-      const recipes = response.json();
-      recipes.forEach((recipe)=>{
-        if(!recipe['ingredients']){
-          recipe.ingredients = [];
-        }
-      });
-      return recipes;
-    }).subscribe((recipes)=>{
-      console.log(recipes);
-      this.recipeService.setRecipes(recipes);
-    });
+    //this.recipeService.fetchRecipes();
+    this.store.dispatch(new RecipesActions.FetchRecipe());
   }
 
   onLogout(){
-    this.authenticateService.logout();
-    this.router.navigate(['../login']);
+    this.store.dispatch(new AuthActions.TryLogout());
+    // this.authenticateService.logout();
+    // this.router.navigate(['../login']);
   }
 
 }

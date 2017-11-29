@@ -9,6 +9,8 @@ import {AuthGuardService} from "../shared/auth-guard.service";
 import {AuthDeactvateGuardService} from "../shared/auth-deactvate-guard.service";
 import {SharedModule} from "../shared/shared.module";
 import {AppRoutingModule} from "../app.routing.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "../auth/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,15 @@ import {AppRoutingModule} from "../app.routing.module";
     HeaderComponent,
     AppRoutingModule
   ],
-  providers: [AuthenticateService, RecipeService, RecipeDetailResolverService, ShoppingListService, AuthGuardService, AuthDeactvateGuardService]
+  providers: [
+    AuthenticateService,
+    RecipeService,
+    RecipeDetailResolverService,
+    ShoppingListService,
+    AuthGuardService,
+    AuthDeactvateGuardService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ]
 
 })
 export class CoreModule { }

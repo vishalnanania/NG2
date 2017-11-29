@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-
-import { AuthenticateService } from '../auth/authenticate.service';
+import { Store } from '@ngrx/store';
+import * as AppReducers from '../store/app.reducers';
+import 'rxjs/add/operator/switchMap';
 
 @Injectable()
 export class AuthGuardService {
-
-  constructor(private authenticateService: AuthenticateService, private router: Router) { }
+  constructor(private store: Store<AppReducers.AppState>) { }
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(!this.authenticateService.isAuthenticated()){
-      alert('Please login in order to execute this operation.');
-    }
-    return this.authenticateService.isAuthenticated();
+    return this.store.select('auth').map((authState)=>{
+      if(!authState.authenticated){
+        alert('Please login in order to execute this operation.');
+      }
+      return authState.authenticated;
+    });
+
   }
 
   canActivateChild(route: ActivatedRouteSnapshot,

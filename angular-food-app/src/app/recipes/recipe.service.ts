@@ -1,18 +1,20 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from "@angular/common/http";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { Store } from "@ngrx/store";
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import { AuthenticateService } from '../auth/authenticate.service';
+import * as shoppingListActions from '../shopping-list/store/shopping-list.actions';
+import * as appReducers from '../store/app.reducers';
+
 
 @Injectable()
 export class RecipeService {
   selectedRecipe = new EventEmitter<Recipe>();
 
-  constructor(private shoppingListService: ShoppingListService, private authenticateService: AuthenticateService, private http: Http, private router: Router, private route: ActivatedRoute) { }
+  constructor(private store: Store<appReducers.AppState>, private httpClient: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   private recipes: Recipe[] = [
         new Recipe('Subway',
@@ -52,18 +54,44 @@ export class RecipeService {
   }
 
   saveRecipes (recipes){
-    const token = this.authenticateService.getToken();
-    return this.http.put('https://food-app-2717.firebaseio.com/recipes.json?auth='+ token, recipes);
-  }
+    //const token = this.authenticateService.getToken();
+    // const req = new HttpRequest(
+    //     'PUT',
+    //     'https://food-app-2717.firebaseio.com/recipes.json',
+    //      recipes,
+    //     {
+    //       reportProgress: true,
+    //       params: new HttpParams().set('auth', token),
+    //      //headers: new HttpHeaders().set('key', value)
+    //     }
+    //   );
+    // return this.httpClient.request(req)
+    //   .subscribe((response)=>{
+    //   console.log(response);
+    //   this.router.navigate(['../'], {relativeTo: this.route});
+    // });
 
-  setRecipes(recipes){
-    this.recipes = recipes;
-    this.recipesChanged.next(this.recipes);
+    return this.httpClient.put(
+      'https://food-app-2717.firebaseio.com/recipes.json',
+      recipes
+    ).subscribe((response: Response)=>{
+      this.router.navigate(['../'], {relativeTo: this.route});
+    });
   }
 
   fetchRecipes (){
-    const token = this.authenticateService.getToken();
-    return this.http.get('https://food-app-2717.firebaseio.com/recipes.json?auth='+ token);
+    //const token = this.authenticateService.getToken();
+    this.httpClient.get(
+      'https://food-app-2717.firebaseio.com/recipes.json'
+    ).subscribe((recipes: Recipe[])=>{
+      for(let recipe of recipes) {
+        if(!recipe['ingredients']){
+          recipe.ingredients = [];
+        }
+      }
+      this.recipes = recipes;
+      this.recipesChanged.next(this.recipes);
+    });
   }
 
   getRecipeById(index: number){
@@ -71,7 +99,8 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients){
-    this.shoppingListService.addIngredients(ingredients);
+    //this.shoppingListService.addIngredients(ingredients);
+    this.store.dispatch( new shoppingListActions.AddIngredients(ingredients));
   }
 
   getNewRecipe(){

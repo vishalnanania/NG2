@@ -1,7 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import 'rxjs/Rx';
 import * as firebase from 'firebase';
 
@@ -17,6 +14,10 @@ export class AppComponent {
     firebase.initializeApp({
       apiKey: "AIzaSyB_tX_2nNryCLdmbl8sr4h1mylNW7kJKY4",
       authDomain: "food-app-2717.firebaseapp.com",
+      databaseURL: "https://food-app-2717.firebaseio.com",
+      projectId: "food-app-2717",
+      storageBucket: "food-app-2717.appspot.com",
+      messagingSenderId: "350783563833"
     });
   }
 }

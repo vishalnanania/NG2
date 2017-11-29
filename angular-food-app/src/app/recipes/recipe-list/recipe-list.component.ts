@@ -1,8 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
+import {Store} from "@ngrx/store";
+import * as AppReducers from '../../store/app.reducers';
+import * as RecipesReducers from '../store/recipes.reducers';
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,15 +13,16 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeListComponent implements OnInit {
 
-  recipes: Recipe[];
+  recipesState: Observable<RecipesReducers.State>;
 
-  constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private store: Store<AppReducers.AppState>, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.recipes = this.recipeService.getRecipes();
-    this.recipeService.recipesChanged.subscribe((recipes)=>{
-      this.recipes = recipes;
-    });
+    this.recipesState = this.store.select('recipes')
+    // this.recipes = this.recipeService.getRecipes();
+    // this.recipeService.recipesChanged.subscribe((recipes)=>{
+    //   this.recipes = recipes;
+    // });
   }
 
   newRecipe(){
