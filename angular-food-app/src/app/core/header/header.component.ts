@@ -7,6 +7,7 @@ import { RecipeService } from '../../recipes/recipe.service';
 import * as AppReducers from '../../store/app.reducers';
 import * as AuthReducers from '../../auth/store/auth.reducers';
 import * as AuthActions from "../../auth/store/auth.actions";
+import * as RecipesActions from "../../recipes/store/recipes.actions";
 
 
 @Component({
@@ -23,13 +24,14 @@ export class HeaderComponent implements OnInit {
   }
 
   onSaveRecipes(){
-    const recipes = this.recipeService.getRecipes();
-    this.recipeService.saveRecipes(recipes);
-
+    // const recipes = this.recipeService.getRecipes();
+    // this.recipeService.saveRecipes(recipes);
+    this.store.dispatch(new RecipesActions.StoreRecipe());
   }
 
   onFetchRecipes(){
-    this.recipeService.fetchRecipes();
+    //this.recipeService.fetchRecipes();
+    this.store.dispatch(new RecipesActions.FetchRecipe());
   }
 
   onLogout(){
