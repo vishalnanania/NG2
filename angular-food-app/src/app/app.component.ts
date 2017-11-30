@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import 'rxjs/Rx';
 import * as firebase from 'firebase';
 
 @Component({

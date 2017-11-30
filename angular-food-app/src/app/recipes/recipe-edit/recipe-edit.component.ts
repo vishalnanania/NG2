@@ -9,6 +9,7 @@ import * as AppReducers from '../../store/app.reducers';
 import * as RecipesReducers from '../store/recipes.reducers';
 import {Store} from "@ngrx/store";
 import * as RecipesActions from "../store/recipes.actions";
+import "rxjs/add/operator/take";
 
 
 @Component({
