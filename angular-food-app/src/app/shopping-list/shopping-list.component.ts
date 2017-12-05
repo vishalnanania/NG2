@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {animate, animation, state, style, transition, trigger} from "@angular/animations";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs/Observable";
 
@@ -10,7 +11,30 @@ import * as appReducers from '../store/app.reducers';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+  styleUrls: ['./shopping-list.component.css'],
+  animations: [
+    trigger('list', [
+      state('initial', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100px)',
+        }),
+        animate(300),
+      ]),
+      transition('* => void', [
+        animate(300,
+          style({
+            opacity: 0,
+            transform: 'translateX(-100px)',
+          })
+        ),
+      ]),
+    ])
+  ]
 })
 export class ShoppingListComponent implements OnInit {
   shoppingListState: Observable<{ingredients: Ingredient[]}>;
